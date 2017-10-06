@@ -1,47 +1,46 @@
-package com.auth0.example;
+package com.auth0.example.controllers;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.auth0.example.AccessTokenResponse;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@Component
+@RestController
 public class PhotosController {
 
+
+    private static final String CLIENT_CREDENTIALS_GRANT = "client_credentials";
+    private String clientId = "ZajjWfD1JnDUmE4qWeFjnlr1JbdNc5Lv";
+    private String clientSecret = "C0itRM5Ulj4F-W-u5Mdxw2OFKoBkw-hEVdxkYhWsKtGf_NSBdE80qppV77aFy8y-";
+
     @RequestMapping(value = "/login")
-    @ResponseBody
     public String login() {
-        return "All good. You DO NOT need to be authenticated to call /login";
+        return "You DO NOT need to be authenticated to call /login";
     }
 
     @RequestMapping(value = "/photos", method = RequestMethod.GET)
-    @ResponseBody
     public String getPhotos() {
         return "All good. You can see this because you are Authenticated with a Token granted the 'read:photos' scope";
     }
 
     @RequestMapping(value = "/photos", method = RequestMethod.POST)
-    @ResponseBody
     public String createPhotos() {
         return "All good. You can see this because you are Authenticated with a Token granted the 'create:photos' scope";
     }
 
-    @RequestMapping(value = "/photos", method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping(value = "/photos")
     public String updatePhotos() {
         return "All good. You can see this because you are Authenticated with a Token granted the 'update:photos' scope";
     }
 
     @RequestMapping(value = "/photos", method = RequestMethod.DELETE)
-    @ResponseBody
     public String deletePhotos() {
         return "All good. You can see this because you are Authenticated with a Token granted the 'delete:photos' scope";
     }
 
     @RequestMapping(value = "/**")
-    @ResponseBody
     public String anyRequest() {
         return "All good. You can see this because you are Authenticated.";
     }
